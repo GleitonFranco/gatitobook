@@ -7,17 +7,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { CabecalhoModule } from './componentes/cabecalho/cabecalho.module';
 import { RodapeModule } from './componentes/rodape/rodape.module';
 import { AnimalComponent } from './animnais/animal/animal.component';
+import {AutenticacaoModule} from "./autenticacao/autenticacao.module";
 
 @NgModule({
-  declarations: [AppComponent, AnimalComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    CabecalhoModule,
-    RodapeModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent, AnimalComponent],
+    imports: [
+      BrowserModule,
+      AppRoutingModule,
+      HttpClientModule,
+      CabecalhoModule,
+      RodapeModule,
+      AutenticacaoModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    exports: [
+      AnimalComponent
+    ]
 })
 export class AppModule {}
