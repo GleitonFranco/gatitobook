@@ -27,7 +27,7 @@ export class DetalheAnimalComponent implements OnInit {
       if (curtiu) {
         this.animal$ = this.animaisService.buscarPorID(this.animalID);
       }
-    })
+    });
   }
 
   excluir() {

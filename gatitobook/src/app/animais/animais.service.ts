@@ -36,11 +36,32 @@ export class AnimaisService {
   }
 
   curtir(id: number): Observable<boolean> {
-    return this.http.post(`${API}/photos/${id}/like`, {observe: 'response'})
-      .pipe(
+    const token = this.tokenService.retornaToken();
+    const headers = new HttpHeaders().append('x-access-token', token);
+    // return this.http.post<boolean>(`${API}/photos/${id}/like`, {headers});
+
+    return this.http.post(
+      `${API}/photos/${id}/like`,
+      {headers},
+      {observe: 'response'}
+    ).pipe(
         mapTo(true),
         catchError((erro) => {
         return erro.status === NOT_MODIFIED ? of(false) : throwError(erro);
       }));
   }
+
+  upload(descricao: string, permiteComentario: boolean, arquivo: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('description', descricao);
+    formData.append('allowComments', permiteComentario ? 'true' : 'false');
+    formData.append('imageFile', arquivo);
+
+    return this.http.post<any>(`${API}/photos/upload`, formData, {
+      observe: 'events',
+      reportProgress: true
+    });
+
+  }
+
 }

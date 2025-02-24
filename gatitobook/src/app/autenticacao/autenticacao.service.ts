@@ -14,6 +14,7 @@ export class AutenticacaoService {
   ) {}
 
   autenticar(usuario: string, senha: string): Observable<HttpResponse<any>> {
+    console.log("começando autenticação do " + usuario);
     return this.httpClient
       .post(
         'http://localhost:3000/user/login',
@@ -27,6 +28,7 @@ export class AutenticacaoService {
         tap((res) => {
           const authToken = res.headers.get('x-access-token') ?? '';
           this.usuarioService.salvaToken(authToken);
+          console.log("Autenticação feita: " + authToken, res);
         })
       );
   }
